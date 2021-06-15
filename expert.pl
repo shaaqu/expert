@@ -61,3 +61,20 @@ miejsce(Krakow) :- is_true('Czy SPA?').
 miejsce(Warszawa).
 
 # INTERFEJS UZYTKOWNIKA
+is_true(Q) :-
+    write("Dokad chcesz wyjechac?"),
+    format("~w?", [Q]),
+    write("(tak/nie)"),
+    read(tak).
+
+# PRZECHODZENIE PRZEZ DRZEWO
+tree_miejsce(miejsce(A), A).
+tree_miejsce(
+    if_then_else(Cond,Then,Else) :-
+        (
+            is_true(Cond) ->
+            tree_miejsce(Then, A)
+            ; tree_miejsce(Else, A)
+        )
+
+).
