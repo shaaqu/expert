@@ -50,6 +50,14 @@ miejsce(A) :-
         tree_miejsce(T, A).
 
 
-miejsce(Lazurowe_Wybrzeze) :- is_true('')
+miejsce(Lazurowe_Wybrzeze) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy nad morzem?').
+miejsce(Sycylia) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy aktywnie?').
+miejsce(Barcelona) :- is_true('Czy za granica?'), is_true('Czy w Europie?').
+miejsce(Nepal) :- is_true('Czy za granica?'), is_true('Czy w gorach?').
+miejsce(Wietnam) :- is_true('Czy za granica?').
+miejsce(Torun) :- is_true('Czy tanio?'), is_true('Czy zwiedzac?').
+miejsce(Sopot) :- is_true('Czy tanio?').
+miejsce(Krakow) :- is_true('Czy SPA?').
+miejsce(Warszawa).
 
 # INTERFEJS UZYTKOWNIKA
