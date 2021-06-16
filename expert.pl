@@ -6,21 +6,21 @@ tree(if_then_else('Czy za granica?',
                     % w europie
                     if_then_else('Czy nad morzem?',
                         % nad morzem
-                        miejsce(Lazurowe_Wybrzeze),
+                        miejsce(lazurowe_wybrzeze),
                         % nie nad mozem
                         if_then_else('Czy aktywnie?',
                             % aktywnie
-                            miejsce(Sycylia),
+                            miejsce(sycylia),
                             % nie aktywnie
-                            miejsce(Barcelona)
+                            miejsce(barcelona)
                         )
                     ),
                     % nie w europie
                     if_then_else('Czy w gorach?',
                         % w gorach
-                        miejsce(Nepal),
+                        miejsce(nepal),
                         % nie w gorach
-                        miejsce(Wietnam)
+                        miejsce(wietnam)
                     )
                 ),
                 % nie za granica
@@ -28,16 +28,16 @@ tree(if_then_else('Czy za granica?',
                     % tanio
                     if_then_else('Czy zwiedzac?',
                         % zwiedzac
-                        miejsce(Torun),
+                        miejsce(torun),
                         % nie zwiedzac
-                        miejsce(Sopot)
+                        miejsce(sopot)
                     ),
                     % nie tanio
                     if_then_else('Czy SPA?',
                         % spa
-                        miejsce(Krakow),
+                        miejsce(krakow),
                         % nie spa
-                        miejsce(Warszawa)
+                        miejsce(warszawa)
                     )
                 )
     )
@@ -50,31 +50,26 @@ miejsce(A) :-
         tree_miejsce(T, A).
 
 
-miejsce(Lazurowe_Wybrzeze) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy nad morzem?').
-miejsce(Sycylia) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy aktywnie?').
-miejsce(Barcelona) :- is_true('Czy za granica?'), is_true('Czy w Europie?').
-miejsce(Nepal) :- is_true('Czy za granica?'), is_true('Czy w gorach?').
-miejsce(Wietnam) :- is_true('Czy za granica?').
-miejsce(Torun) :- is_true('Czy tanio?'), is_true('Czy zwiedzac?').
-miejsce(Sopot) :- is_true('Czy tanio?').
-miejsce(Krakow) :- is_true('Czy SPA?').
-miejsce(Warszawa).
+miejsce(lazurowe_wybrzeze) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy nad morzem?').
+miejsce(sycylia) :- is_true('Czy za granica?'), is_true('Czy w Europie?'), is_true('Czy aktywnie?').
+miejsce(barcelona) :- is_true('Czy za granica?'), is_true('Czy w Europie?').
+miejsce(nepal) :- is_true('Czy za granica?'), is_true('Czy w gorach?').
+miejsce(wietnam) :- is_true('Czy za granica?').
+miejsce(torun) :- is_true('Czy tanio?'), is_true('Czy zwiedzac?').
+miejsce(sopot) :- is_true('Czy tanio?').
+miejsce(krakow) :- is_true('Czy SPA?').
+miejsce(warszawa).
 
 % INTERFEJS UZYTKOWNIKA
 is_true(Q) :-
-    write("Dokad chcesz wyjechac?"),
-    format("~w?", [Q]),
+    write("Dokad chcesz wyjechac? "),
+    format("~w", [Q]),
     write("(tak/nie)"),
     read(tak).
 
 % PRZECHODZENIE PRZEZ DRZEWO
 tree_miejsce(miejsce(A), A).
-tree_miejsce(
-    if_then_else(Cond,Then,Else) :-
-        (
-            is_true(Cond) ->
-            tree_miejsce(Then, A)
-            ; tree_miejsce(Else, A)
-        )
-
-).
+tree_miejsce(if_then_else(Cond,Then,Else), A) :-
+        is_true(Cond) ->
+        tree_miejsce(Then, A)
+        ; tree_miejsce(Else, A).
