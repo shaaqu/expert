@@ -1,3 +1,17 @@
+% INTERFEJS UZYTKOWNIKA
+is_true(Q) :-
+    write("Dokad chcesz wyjechac? "),
+    format("~w", [Q]),
+    write("(tak/nie)"),
+    read(tak).
+
+% PRZECHODZENIE PRZEZ DRZEWO
+tree_miejsce(miejsce(A), A).
+tree_miejsce(if_then_else(Cond,Then,Else), A) :-
+        is_true(Cond) ->
+        tree_miejsce(Then, A)
+        ; tree_miejsce(Else, A).
+
 % DRZEWO DECYZYJNE
 
 tree(if_then_else('Czy za granica?',
@@ -59,17 +73,3 @@ miejsce(torun) :- is_true('Czy tanio?'), is_true('Czy zwiedzac?').
 miejsce(sopot) :- is_true('Czy tanio?').
 miejsce(krakow) :- is_true('Czy SPA?').
 miejsce(warszawa).
-
-% INTERFEJS UZYTKOWNIKA
-is_true(Q) :-
-    write("Dokad chcesz wyjechac? "),
-    format("~w", [Q]),
-    write("(tak/nie)"),
-    read(tak).
-
-% PRZECHODZENIE PRZEZ DRZEWO
-tree_miejsce(miejsce(A), A).
-tree_miejsce(if_then_else(Cond,Then,Else), A) :-
-        is_true(Cond) ->
-        tree_miejsce(Then, A)
-        ; tree_miejsce(Else, A).
